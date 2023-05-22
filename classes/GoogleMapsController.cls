@@ -5,7 +5,8 @@ public class GoogleMapsController {
         Http h = new Http();
         HttpRequest req = new HttpRequest();
         req.setMethod('GET');
-        
+        originAddress = EncodingUtil.urlEncode(originAddress,'UTF-8');
+        destinationAddress = EncodingUtil.urlEncode(destinationAddress,'UTF-8');
         String url = 'https://maps.googleapis.com/maps/api/distancematrix/json'
             + '?origins=' + originAddress
             + '&destinations=' + destinationAddress
@@ -13,7 +14,6 @@ public class GoogleMapsController {
             + '&mode=' + travelMode
             + '&key=AIzaSyAtz0BoncTGOjWoEeVdmy0EI6eLHKJYc3E';
         
-        url = url.replace(' ', '%20');
         req.setEndPoint(url);
         HttpResponse res = h.send(req);
         system.debug(res.getBody());
